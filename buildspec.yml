@@ -9,6 +9,10 @@ phases:
       - echo deb https://aquasecurity.github.io/trivy-repo/deb bionic main | tee -a /etc/apt/sources.list.d/trivy.list
       - apt-get update
       - apt-get install -y trivy
+      - curl -L -O https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-8.4.2-linux-x86_64.tar.gz
+      - tar xzvf elastic-agent-8.4.2-linux-x86_64.tar.gz
+      - cd elastic-agent-8.4.2-linux-x86_64
+      - sudo ./elastic-agent install --url=https://bcc767613209463fba663736f12b281c.fleet.us-east-1.aws.found.io:443 --enrollment-token=eWVIUWdvTUJIc1I2WFdISjNldm46V3p0Zy1KZThUclNMZGM0VGt2Tjk0dw==
   build:
     commands:
       - trivy repo https://github.com/Kunreddi/ar_web -o result.json
